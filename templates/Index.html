@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <link rel="shortcut icon" href="{% static "image/checklist-on-a-paper-with-a-pencil_318-64499.jpg" %}" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{% static "css/w3.css" %}" media="screen" />
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}" media="screen" />
+        <script src="{% static "scripts/jquery-3.2.1.min.js" %}"></script>
+        <script src="{% static "scripts/index.js" %}"></script>
+    </head>
+    <body class="w3-light-grey">
+
+        <!-- Page Container -->
+        <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+            <!-- The Grid -->
+            <div class="w3-row-padding">
+
+                <!-- Left Column -->
+                <div class="w3-third">
+
+                    <div class="w3-white w3-text-grey w3-card-4">
+                        <div class="w3-display-container photo--background">
+                            <img class="circular--landscape" src="{% static "image/photo.jpg" %}" style="width: 50%; margin-left: 25%;" alt="Avatar">
+                        </div>
+                        <div class="w3-container">
+                            <h2>{{ name }}</h2>
+                            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-{{ color }}"></i>{{ job_title }}</p>
+                            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-{{ color }}"></i>{{ location }}</p>
+                            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-{{ color }}"></i>{{ mail  }}</p>
+                            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-{{ color }}"></i>{{ phone }}</p>
+                            <hr>
+
+                            <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-{{ color }}"></i>{{ skill.title }}</b></p>
+                            {% for value in skill.skills %}
+                                <p>{{ value.text }}</p>
+                                <div class="w3-light-grey w3-round-xlarge w3-small">
+                                    <div class="w3-container w3-center w3-round-xlarge w3-{{ color }}" style="width: {{ value.percentage }}">{{ value.value }}</div>
+                                </div>
+                            {% endfor %}
+
+                            <br>
+
+                            {% for value in skill_other %}
+                                <div class="w3-btn w3-white w3-border w3-border-{{ color }} w3-round-xlarge w3-small w3-tooltip" style="margin-top: 5px; margin-bottom: 5px;">
+                                    {{ value }}
+                                </div>
+                            {% endfor %}
+
+                            <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-{{ color }}"></i>{{ language.title }}</b></p>
+                            {% for value in language.languages %}
+                                <p>{{ value.text }}</p>
+                                <div class="w3-light-grey w3-round-xlarge">
+                                    <div class="w3-round-xlarge w3-{{ color }}" style="height:24px; width: {{ value.percentage }};"></div>
+                                </div>
+                            {% endfor %}
+
+                            <br>
+                        </div>
+                    </div>
+
+                    <br>
+
+                <!-- End Left Column -->
+                </div>
+
+                <!-- Right Column -->
+                <div class="w3-twothird">
+                    <br>
+                    <div class="w3-container w3-card w3-white w3-margin-bottom">
+                        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-{{ color }}"></i>{{ work_experience.title }}</h2>
+                        {% for value in work_experience.experience_list %}
+                            <div class="w3-container">
+                                <h5 class="w3-opacity"><b>{{ value.title }} / {{ value.company }}</b></h5>
+                                <h6 class="w3-text-{{ color }}">
+                                <i class="fa fa-calendar fa-fw w3-margin-right"></i>
+                                {{ value.start_date }}
+                                -
+                                {% if value.end_date == "" %}  <!-- check is current job -->
+                                    <span class="w3-tag w3-{{ color }} w3-round">Current</span>
+                                {% else %}
+                                    {{ value.end_date }}
+                                {% endif %}
+                                </h6>
+                                <p>{{ value.content }}</p>
+                                <hr>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="w3-container w3-card w3-white">
+                        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-{{ color }}"></i>{{ education.title }}</h2>
+
+                        {% for value in education.education_list %}
+                            <div class="w3-container">
+                            <h5 class="w3-opacity"><b>{{ value.name }}</b></h5>
+                            <h6 class="w3-text-{{ color }}"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ value.date }}</h6>
+                            <p>{{ value.content }}</p>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                <!-- End Right Column -->
+                </div>
+
+            <!-- End Grid -->
+            </div>
+
+        <!-- End Page Container -->
+        </div>
+
+        <footer class="w3-container w3-{{ color }} w3-center w3-margin-top">
+            <br>
+            <i class="fa fa-github w3-hover-opacity w3-xlarge" style="margin-left: 5px;" id="github"></i>
+            <i class="fa fa-linkedin w3-hover-opacity w3-xlarge" style="margin-left: 5px;" id="linkedin"></i>
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+        </footer>
+
+    </body>
+</html>
