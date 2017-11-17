@@ -12,3 +12,4 @@
 需要修改資料的地方:
 1.  個人資料(ResumeA -> Models -> index.py)
 2.  footer icon link(ResumeA -> static -> scripts -> index.js)
+3.  將你的圖片放置(ResumeA -> static -> image) 名稱為phote.jpg
